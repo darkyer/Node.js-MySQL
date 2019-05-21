@@ -29,10 +29,10 @@ function readProducts() {
         console.log("Here is a list of all products available...\n");
         for (let index = 0; index < res.length; index++) {
             console.log("Id: " + res[index].item_id
-                + " Product: " + res[index].product_name
-                + " Deparment: " + res[index].department_name
-                + " Price: " + res[index].price
-                + " Available units: " + res[index].stock_quantity);
+                + " - " + res[index].product_name
+                + " - " + res[index].department_name
+                + " - $" + res[index].price
+                + " - " + res[index].stock_quantity + " units.");
         }
         console.log("\n");
         askAction();
@@ -94,7 +94,7 @@ function buyProduct(id, amount) {
             if (parseInt(res[0].stock_quantity) >= parseInt(amount)) {
                 var total = parseInt(res[0].price) * amount;
                 updateProduct(id, res[0].stock_quantity, amount);
-                console.log("You paid: " + total + " and removed " + amount + " units from " + res[0].product_name + "\n");
+                console.log("You paid: $" + total + " and removed " + amount + " units from " + res[0].product_name + "\n");
             } else {
                 console.log("We don't have enough units to complete your request\n");
                 askAction();

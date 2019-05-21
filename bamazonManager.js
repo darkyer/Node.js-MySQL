@@ -26,13 +26,13 @@ function readProducts() {
     connection.query("SELECT * FROM products", function (err, res) {
         if (err) throw err;
         // Log all results of the SELECT statement
-        console.log("Here is a list of all products available...\n");
+        console.log("\nHere is a list of all products available...\n");
         for (let index = 0; index < res.length; index++) {
             console.log("Id: " + res[index].item_id
-                + " Product: " + res[index].product_name
-                + " Deparment: " + res[index].department_name
-                + " Price: " + res[index].price
-                + " Available units: " + res[index].stock_quantity);
+                + " - " + res[index].product_name
+                + " - " + res[index].department_name
+                + " - $" + res[index].price
+                + " - " + res[index].stock_quantity + " units.");
         }
         console.log("\n");
         askAction();
@@ -78,13 +78,14 @@ function askAction() {
 }
 
 function viewLowInventory() {
+    console.log("\n")
     connection.query("SELECT * FROM products WHERE stock_quantity < 5", function (err, res) {
         for (let index = 0; index < res.length; index++) {
             console.log("Id: " + res[index].item_id
-                + " Product: " + res[index].product_name
-                + " Deparment: " + res[index].department_name
-                + " Price: " + res[index].price
-                + " Available units: " + res[index].stock_quantity);
+                + " - " + res[index].product_name
+                + " - " + res[index].department_name
+                + " - $" + res[index].price
+                + " - " + res[index].stock_quantity + " units.");
         }
         console.log("\n");
         askAction();
@@ -141,7 +142,7 @@ function addInventory() {
             }],
             function (err, res) {
                 console.log("\n");
-                console.log("Added "+ answers.amountToAdd + " to: " + res[0].product_name);
+                console.log("Added " + answers.amountToAdd + " to: " + res[0].product_name);
                 updateProduct(answers.itemToAdd, res[0].stock_quantity, answers.amountToAdd);
             });
     });
@@ -164,26 +165,36 @@ function updateProduct(id, stock, amountToAdd) {
             askAction();
         }
     );
-
-
-    // // logs the actual query being run
-    // console.log(query.sql);
 }
 
 function createProduct(itemName, itemPrice, itemDepartment, stock) {
-    console.log("Inserting a new product with name: " + itemName + " and price: " + itemPrice + " with: "+ stock+" units...\n");
-    var query = connection.query(
-        "INSERT INTO products SET ?",
-        {
-            product_name: itemName,
-            price: itemPrice,
-            department_name: itemDepartment,
-            stock_quantity: stock
-        },
+    console.log("\nChequing existanse of product with name: " + itemName + " and price: " + itemPrice + " with: " + stock + " units.\n");
+
+    connection.query("SELECT * FROM products WHERE ?",
+        [{
+            product_name: itemName
+        }],
         function (err, res) {
-            askAction();
-        }
-    );
+            if (res.length > 0) {
+                console.log("Product exist updating insted of creating a new one\n");
+                updateProduct(res[0].item_id, res[0].stock_quantity, stock);
+                return;
+            } else {
+                console.log("Product doesn't exist, creating a new one\n");
+                var query = connection.query(
+                    "INSERT INTO products SET ?",
+                    {
+                        product_name: itemName,
+                        price: itemPrice,
+                        department_name: itemDepartment,
+                        stock_quantity: stock
+                    },
+                    function (err, res) {
+                        askAction();
+                    }
+                );
+            }
+        });
 }
 
 function exit() {
