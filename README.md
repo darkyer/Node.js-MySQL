@@ -31,9 +31,9 @@ To use it you need to have a database with some information in there, then you n
 
 ## Working proof
 
-* See it in action gif: 
-![alt text](https://raw.githubusercontent.com/darkyer/Node.js-MySQL/master/Proof/bAmazonCostumer.mp4 "Costumer Proof Video")
-![alt text](https://raw.githubusercontent.com/darkyer/Node.js-MySQL/master/Proof/bAmazonManager.mp4 "Manager Proof Video")
+* See it in action videos (need to download): 
+* ![Costumer Proof Video](https://raw.githubusercontent.com/darkyer/Node.js-MySQL/master/Proof/bAmazonCostumer.mp4 "Costumer Proof Video")
+* ![Manager Proof Vide](https://raw.githubusercontent.com/darkyer/Node.js-MySQL/master/Proof/bAmazonManager.mp4 "Manager Proof Video")
 
 ## Authors
 
