@@ -32,7 +32,8 @@ To use it you need to have a database with some information in there, then you n
 ## Working proof
 
 * See it in action gif: 
-![alt text](https://github.com/darkyer/Node.js-MySQL/blob/master/proof.gif "Proof Gif")
+![alt text](https://raw.githubusercontent.com/darkyer/Node.js-MySQL/master/Proof/bAmazonCostumer.mp4 "Costumer Proof Video")
+![alt text](https://raw.githubusercontent.com/darkyer/Node.js-MySQL/master/Proof/bAmazonManager.mp4 "Manager Proof Video")
 
 ## Authors
 
